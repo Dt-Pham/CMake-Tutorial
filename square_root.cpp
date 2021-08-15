@@ -1,9 +1,14 @@
 /* 
  * A simple program to calculate square root of a number
  */
-#include "TutorialConfig.h"
 #include <iostream>
+#include "TutorialConfig.h"
+
+#ifdef USE_MYMATH
+#include "MathFunctions.h"
+#else
 #include <cmath>
+#endif
 
 int main(int argc, char **argv) {
     if (argc < 2) {
@@ -15,8 +20,14 @@ int main(int argc, char **argv) {
     // convert input to double
     const double input = std::stod(argv[1]);
 
+#ifdef USE_MYMATH
+    const double output = mysqrt(input);
+    std::cout << "mysqrt(" << input << ") = " << output << std::endl;
+#else
     const double output = std::sqrt(input);
-    std::cout << output << std::endl;
+    std::cout << "std::sqrt(" << input << ") = " << output << std::endl;
+#endif
+
 
     return 0;
 }
