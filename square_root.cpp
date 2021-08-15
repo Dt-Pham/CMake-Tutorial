@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     }
     
     // convert input to double
-    const double input = atof(argv[1]);
+    const double input = std::stod(argv[1]);
 
     const double output = std::sqrt(input);
     std::cout << output << std::endl;
