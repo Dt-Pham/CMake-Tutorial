@@ -34,3 +34,31 @@ install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h"
         DESTINATION include
         )
 
+enable_testing()
+
+# does the application run
+add_test(NAME Runs COMMAND Tutorial 25)
+
+# does the usage message work?
+add_test(NAME Usage COMMAND Tutorial)
+set_tests_properties(Usage
+                     PROPERTIES PASS_REGULAR_EXPRESSION "Usage:.*number"
+                     )
+
+# define a function to simplify adding tests
+function(do_test target arg result)
+    add_test(NAME Comp${arg} COMMAND ${target} ${arg})
+    set_tests_properties(Comp${arg}
+                         PROPERTIES PASS_REGULAR_EXPRESSION ${result}
+                         )
+endfunction(do_test)
+
+# do a bunch of result based tests
+do_test(Tutorial 4 ".*sqrt\\(4\\) = 2")
+do_test(Tutorial 9 ".*sqrt\\(9\\) = 3")
+do_test(Tutorial 5 ".*sqrt\\(5\\) = 2.236")
+do_test(Tutorial 7 ".*sqrt\\(7\\) = 2.645")
+do_test(Tutorial 25 ".*sqrt\\(25\\) = 5")
+do_test(Tutorial -25 ".*sqrt\\(4\\) = [-nan|nan|0]")
+do_test(Tutorial 0.0001 ".*sqrt\\(0.0001\\) = 0.01")
+
