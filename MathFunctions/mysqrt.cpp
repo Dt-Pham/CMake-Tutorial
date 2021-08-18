@@ -1,8 +1,19 @@
 #include "MathFunctions.h"
+#include "Table.h"
 #include <cmath>
 #include <iostream>
 
 double mysqrt(double x) {
+    if (x <= 0) {
+        return nan("");
+    }
+
+    // use look up table if the value is small
+    if (x < 10) {
+        std::cout << "Use look up table" << std::endl;
+        return sqrtTable[static_cast<int>(x)];
+    }
+    
 
 #if defined(HAVE_LOG) && defined(HAVE_EXP)
     double ans = exp(log(x) * 0.5);

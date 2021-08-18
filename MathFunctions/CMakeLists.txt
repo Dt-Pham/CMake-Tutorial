@@ -1,6 +1,20 @@
-add_library(MathFunctions mysqrt.cpp)
+# generate Table.h
+add_executable(MakeTable MakeTable.cpp)
+
+add_custom_command(
+    OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+    COMMAND MakeTable ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+    DEPENDS MakeTable
+    )
+
+add_library(MathFunctions
+            mysqrt.cpp
+            ${CMAKE_CURRENT_BINARY_DIR}/Table.h
+            )
+
 target_include_directories(MathFunctions
                            INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
+                           PRIVATE ${CMAKE_CURRENT_BINARY_DIR}
                            )
 
 # check if the system have function log() and exp()
