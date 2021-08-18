@@ -62,3 +62,9 @@ do_test(Tutorial 25 ".*sqrt\\(25\\) = 5")
 do_test(Tutorial -25 ".*sqrt\\(4\\) = [-nan|nan|0]")
 do_test(Tutorial 0.0001 ".*sqrt\\(0.0001\\) = 0.01")
 
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_VERSION_MAJOR "${Tutorial_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${Tutorial_VERSION_MINOR}")
+include(CPack)
+
