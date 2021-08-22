@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_DEBUG_POSTFIX d)
+
 # set the project name
 project(Tutorial VERSION 1.0)
 
@@ -29,6 +31,8 @@ add_subdirectory(MathFunctions)
 
 # add executable
 add_executable(Tutorial square_root.cpp)
+set_target_properties(Tutorial PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+
 target_link_libraries(Tutorial PUBLIC MathFunctions)
 
 # add directories to list of paths to search for include files
